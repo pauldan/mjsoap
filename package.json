@@ -1,0 +1,14 @@
+{
+  "name": "mjsoap",
+  "version": "1.0.0",
+  "description": "soap client to fetch data from the mj site",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paul Dan",
+  "license": "MIT",
+  "dependencies": {
+    "soap": "^0.29.0"
+  }
+}
