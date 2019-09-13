@@ -40,7 +40,7 @@ app.post('/cautare/dosare', (req, res) => {
     if (value) return { ...acc, [el]: value };
     return acc;
   }, {});
-  console.log(`[INFO] Searching for \n${JSON.stringify(search, null, 2)}`);
+  console.log(`[INFO] Searching for\n${JSON.stringify(search, null, 2)}`);
   soap.createClient(URL, (err, client) => {
     if (err) {
       res.status(503).send({ message: 'Server error' });
@@ -67,9 +67,10 @@ app.post('/cautare/dosare', (req, res) => {
         return res.status(503).send({ error: err });
       }
       if (result) {
-        res
-          .status(200)
-          .send({ count: result.CautareDosareResult.Dosar.length, result });
+        res.status(200).send({
+          count: result.CautareDosareResult.Dosar.length,
+          result: result.CautareDosareResult.Dosar,
+        });
       } else {
         res.status(200).send({ count: 0 });
       }
@@ -105,7 +106,7 @@ app.post('/cautare/dosare2', (req, res) => {
     if (value) return { ...acc, [el]: value };
     return acc;
   }, {});
-  console.log(`[INFO] Searching for \n ${JSON.stringify(search, null, 2)}`);
+  console.log(`[INFO] Searching for\n${JSON.stringify(search, null, 2)}`);
   soap.createClient(URL, (err, client) => {
     if (err) {
       res.status(503).send({ message: 'Server error' });
@@ -132,9 +133,10 @@ app.post('/cautare/dosare2', (req, res) => {
         return res.status(503).send({ error: err });
       }
       if (result) {
-        res
-          .status(200)
-          .send({ count: result.CautareDosare2Result.Dosar.length, result });
+        res.status(200).send({
+          count: result.CautareDosare2Result.Dosar.length,
+          result: result.CautareDosare2Result.Dosar,
+        });
       } else {
         res.status(200).send({ count: 0 });
       }
@@ -155,7 +157,7 @@ app.post('/cautare/sedinte', (req, res) => {
   if (dataSedinta) {
     search.dataSedinta = new Date(dataSedinta).toISOString();
   }
-  console.log(`[INFO] Searching for \n ${JSON.stringify(search, null, 2)}`);
+  console.log(`[INFO] Searching for\n${JSON.stringify(search, null, 2)}`);
   soap.createClient(URL, (err, client) => {
     if (err) {
       res.status(503).send({ message: 'Server error' });
@@ -182,9 +184,10 @@ app.post('/cautare/sedinte', (req, res) => {
         return res.status(503).send({ error: err });
       }
       if (result) {
-        res
-          .status(200)
-          .send({ count: result.CautareSedinteResult.Sedinta.length, result });
+        res.status(200).send({
+          count: result.CautareSedinteResult.Sedinta.length,
+          result: result.CautareSedinteResult.Sedinta,
+        });
       } else {
         res.status(200).send({ count: 0 });
       }
