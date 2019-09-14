@@ -2,7 +2,9 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http');
+const path = require('path');
 const soap = require('soap');
+const cors = require('cors');
 
 const PORT = Number.parseInt(process.env.PORT, 10) || 7000;
 const URL = 'http://portalquery.just.ro/query.asmx?WSDL';
@@ -10,10 +12,18 @@ const URL = 'http://portalquery.just.ro/query.asmx?WSDL';
 const app = express();
 
 // middleware
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+    credentials: 'omit',
+  }),
+);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(express.static('public'));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 // routes
 
 /*
@@ -41,7 +51,7 @@ app.post('/cautare/dosare', (req, res) => {
     return acc;
   }, {});
   console.log(`[INFO] Searching for\n${JSON.stringify(search, null, 2)}`);
-  soap.createClient(URL, (err, client) => {
+  soap.createClient(URL, { forceSoap12Headers: true }, (err, client) => {
     if (err) {
       res.status(503).send({ message: 'Server error' });
       return;
@@ -61,11 +71,12 @@ app.post('/cautare/dosare', (req, res) => {
     client.on('response', (body, response, eid) => {
       console.log(`[Response] ${eid} ${new Date().toLocaleString()}`);
     });
-    client.CautareDosare(search, (err, result) => {
+    client.CautareDosare(search, (err, result, body, eid) => {
       if (err) {
         console.log(`[Error] ${JSON.stringify(err, null, 2)}`);
         return res.status(503).send({ error: err });
       }
+      console.log(result);
       if (result) {
         res.status(200).send({
           count: result.CautareDosareResult.Dosar.length,
