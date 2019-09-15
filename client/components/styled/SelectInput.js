@@ -17,7 +17,8 @@ const Label = styled.label`
     border-bottom-color: ${props => props.theme.color.primary};
     &:focus {
       outline: none;
-      box-shadow: ${props => props.theme.shadow2focus};
+      box-shadow: ${props =>
+        props.theme.shadow2 + ', 0 0 2px 2px hsla(255,100%, 0%, 0.2)'};
     }
     &:disabled {
       color: red;

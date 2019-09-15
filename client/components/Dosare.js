@@ -7,7 +7,9 @@ import Page from './Page';
 import TextInput from './styled/TextInput';
 import SelectInput from './styled/SelectInput';
 import Button from './styled/Button';
-
+import SearchForm from './styled/SearchForm';
+import SelectInstitutie from './SelectInstitutie';
+import Results from './Results';
 
 const validationSchema = yup.object().shape({
   numeParte: yup.string(),
@@ -41,6 +43,7 @@ class Dosare extends React.Component {
       results: [],
       loading: false,
       error: null,
+      hasSearched: false,
     };
   }
 
@@ -67,9 +70,13 @@ class Dosare extends React.Component {
       );
       if (res.data) {
         if (res.data.count > 0) {
-          this.setState({ results: res.data.result, loading: false });
+          this.setState({
+            results: res.data.result,
+            loading: false,
+            hasSearched: true,
+          });
         } else {
-          this.setState({ results: [], loading: false });
+          this.setState({ results: [], loading: false, hasSearched: true });
         }
       }
     } catch (error) {
@@ -78,7 +85,8 @@ class Dosare extends React.Component {
   };
 
   render() {
-    const { results, loading, error } = this.state;
+    const { results, loading, error, hasSearched } = this.state;
+    console.log(results);
     return (
       <Page>
         <h1>Căutare dosare</h1>
@@ -89,6 +97,7 @@ class Dosare extends React.Component {
             numeParte: '',
             dataStart: '',
             dataStop: '',
+            institutie: '',
           }}
           onSubmit={async (values, { setSubmitting }) => {
             await this.handleSubmit(values);
@@ -113,7 +122,7 @@ class Dosare extends React.Component {
               dataStop: dataStopError,
             } = errors;
             return (
-              <form onSubmit={handleSubmit} method="post">
+              <SearchForm onSubmit={handleSubmit} method="post">
                 <TextInput
                   label="Număr dosar"
                   placeholder="Număr dosar"
@@ -138,20 +147,14 @@ class Dosare extends React.Component {
                   value={numeParte}
                   onChange={handleChange}
                 />
-                <SelectInput
+                <SelectInstitutie
                   label="Instituție"
                   placeholder="Instituție"
                   name="institutie"
                   error={institutieError}
                   value={institutie}
                   onChange={handleChange}
-                >
-                  {institutii.map(el => (
-                    <option key={el} value={el}>
-                      {el}
-                    </option>
-                  ))}
-                </SelectInput>
+                />
                 <TextInput
                   label="Dată început"
                   placeholder="Dată început"
@@ -170,18 +173,16 @@ class Dosare extends React.Component {
                   value={dataStop}
                   onChange={handleChange}
                 />
-                <Button type="submit" className="success">
-                  Caută
-                </Button>
-              </form>
+                <div>
+                  <Button type="submit" className="success">
+                    Caută
+                  </Button>
+                </div>
+              </SearchForm>
             );
           }}
         </Formik>
-        <ul>
-          {results.map(res => (
-            <li key={res.numar}>{res.numar}</li>
-          ))}
-        </ul>
+        {hasSearched && <Results results={results} />}
       </Page>
     );
   }

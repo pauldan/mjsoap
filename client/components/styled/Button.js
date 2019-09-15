@@ -27,7 +27,8 @@ const StyledButton = styled.button`
   }
   &:focus {
     outline: none;
-    box-shadow: ${props => props.theme.shadow2focus};
+    box-shadow: ${props =>
+      props.theme.shadow2 + ', 0 0 2px 2px hsla(255, 100%, 0%, .2)'};
   }
 `;
 
