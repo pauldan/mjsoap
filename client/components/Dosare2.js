@@ -43,6 +43,8 @@ const initialValues = {
   dataStart: '',
   dataStop: '',
   institutie: '',
+  dataUltimaModificareStart: '',
+  dataUltimaModificareStop: '',
 };
 
 const isChanged = values =>
@@ -71,9 +73,10 @@ class Dosare extends React.Component {
     if (dataStop) {
       payload.dataStop = new Date(dataStop).toISOString();
     }
+    console.log(payload);
     try {
       const res = await axios.post(
-        'http://localhost:7000/cautare/dosare',
+        'http://localhost:7000/cautare/dosare2',
         {
           ...payload,
         },
@@ -102,7 +105,7 @@ class Dosare extends React.Component {
     const { results, loading, error, hasSearched } = this.state;
     return (
       <Page>
-        <h1>Căutare dosare</h1>
+        <h1>Căutare dosare2</h1>
         <Formik
           initialValues={initialValues}
           onSubmit={async (values, { setSubmitting }) => {
@@ -118,6 +121,8 @@ class Dosare extends React.Component {
               institutie,
               dataStart,
               dataStop,
+              dataUltimaModificareStart,
+              dataUltimaModificareStop,
             } = values;
             const {
               numarDosar: numarDosarError,
@@ -126,9 +131,15 @@ class Dosare extends React.Component {
               institutie: institutieError,
               dataStart: dataStartError,
               dataStop: dataStopError,
+              dataUltimaModificareStart: dataUltimaModificareStartError,
+              dataUltimaModificareStop: dataUltimaModificareStopError,
             } = errors;
             return (
-              <SearchForm onSubmit={handleSubmit} method="post">
+              <SearchForm
+                onSubmit={handleSubmit}
+                method="post"
+                disabled={loading}
+              >
                 <TextInput
                   label="Număr dosar"
                   placeholder="Număr dosar"
@@ -177,6 +188,24 @@ class Dosare extends React.Component {
                   type="date"
                   error={dataStopError}
                   value={dataStop}
+                  onChange={handleChange}
+                />
+                <TextInput
+                  label="Dată ultima modificare început"
+                  placeholder="Dată ultima modificare început"
+                  name="dataUltimaModificareStart"
+                  type="date"
+                  error={dataUltimaModificareStartError}
+                  value={dataUltimaModificareStart}
+                  onChange={handleChange}
+                />
+                <TextInput
+                  label="Dată ultima modificare sfârșit"
+                  placeholder="Dată ultima modificare sfârșit"
+                  name="dataUltimaModificareStop"
+                  type="date"
+                  error={dataUltimaModificareStopError}
+                  value={dataUltimaModificareStop}
                   onChange={handleChange}
                 />
                 <div>

@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import Dosare from '../components/Dosare';
+import Dosare2 from '../components/Dosare2';
 
 const Dosare2Page = () => (
   <>
     <Head>
-      <title>Cautare dosare</title>
+      <title>Cautare dosare2</title>
     </Head>
-    <Dosare />
+    <Dosare2 />
   </>
 );
 

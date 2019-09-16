@@ -1,15 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import HomePage from '../components/HomePage';
+import Sedinte from '../components/Sedinte';
 
-const Sedinte = () => (
+const SedintePage = () => (
   <>
     <Head>
       <title>Cautare dosare</title>
     </Head>
-    <HomePage />
+    <Sedinte />
   </>
 );
 
-export default Sedinte;
+export default SedintePage;

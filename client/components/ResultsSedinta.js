@@ -59,51 +59,35 @@ const Results = ({ results }) => {
         <Table>
           <thead>
             <tr>
-              <th>Numar dosar</th>
-              <th>Data</th>
-              <th>Obiect</th>
-              <th>Materie</th>
-              <th>Stadiu procesual</th>
               <th>Secția</th>
-              <th>Instanța</th>
-              <th>Ultima modificare</th>
+              <th>Complet</th>
+              <th>Data</th>
+              <th>Ora</th>
+              <th>Dosare</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
-            {results.map(
-              (
-                {
-                  categorieCazNume,
-                  data,
-                  dataModificare,
-                  departament,
-                  institutie,
-                  numar,
-                  numarVechi,
-                  obiect,
-                  stadiuProcesualNume,
-                },
-                idx,
-              ) => (
-                <tr key={numar} className={idx === selected ? 'selected' : ''}>
-                  <td>
-                    {numar}
-                    {numarVechi && `(${numarVechi})`}
-                  </td>
-                  <td>{new Date(data).toLocaleDateString()}</td>
-                  <td>{obiect}</td>
-                  <td>{categorieCazNume}</td>
-                  <td>{stadiuProcesualNume}</td>
-                  <td>{departament}</td>
-                  <td>{institutie}</td>
-                  <td>{new Date(dataModificare).toLocaleDateString()}</td>
-                  <td>
-                    <button onClick={e => select(idx)}>Detalii</button>
-                  </td>
-                </tr>
-              ),
-            )}
+            {results.map(({ data, departament, ora, dosare, complet }, idx) => (
+              <tr
+                key={`${complet} ${new Date(data).getTime()}`}
+                className={idx === selected ? 'selected' : ''}
+              >
+                <td>{departament}</td>
+                <td>{complet}</td>
+                <td>{new Date(data).toLocaleDateString()}</td>
+                <td>{ora}</td>
+                <td>
+                  {(dosare &&
+                    dosare.SedintaDosar &&
+                    dosare.SedintaDosar.length) ||
+                    '-'}
+                </td>
+                <td>
+                  <button onClick={e => select(idx)}>Detalii</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       )}
