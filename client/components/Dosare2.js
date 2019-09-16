@@ -76,7 +76,7 @@ class Dosare extends React.Component {
     console.log(payload);
     try {
       const res = await axios.post(
-        'http://localhost:7000/cautare/dosare2',
+        process.env.URL_DOSARE2 || 'http://localhost:7000/cautare/dosare2',
         {
           ...payload,
         },

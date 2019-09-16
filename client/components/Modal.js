@@ -26,7 +26,6 @@ const Dialog = styled.div`
   justify-self: center;
   padding: 1em 1em;
   overflow-y: auto;
-  overflow-x: wrap;
   max-height: 90vh;
   h5 {
     padding: 0;

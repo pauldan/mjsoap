@@ -6,7 +6,7 @@ import Sedinte from '../components/Sedinte';
 const SedintePage = () => (
   <>
     <Head>
-      <title>Cautare dosare</title>
+      <title>Cautare ședințe</title>
     </Head>
     <Sedinte />
   </>

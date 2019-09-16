@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import Table from './styled/Table';
+import CodeSnippet from './styled/CodeSnippet';
 import Link from 'next/link';
 import Modal from './Modal';
 
@@ -11,29 +12,6 @@ const Hr = styled.hr`
   color: ${props => props.theme.color.default}
   width: 80%;
   margin: 1em 0;
-`;
-
-const CodeSnippet = styled.pre`
-  background: #eee;
-  outline: 1px solid #ccc;
-  padding: 1em;
-  margin: 1em 0;
-  border-radius: 5px;
-  .string {
-    color: green;
-  }
-  .number {
-    color: darkorange;
-  }
-  .boolean {
-    color: blue;
-  }
-  .null {
-    color: magenta;
-  }
-  .key {
-    color: red;
-  }
 `;
 
 const Results = ({ results }) => {
