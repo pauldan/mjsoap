@@ -1,0 +1,15 @@
+version: '3'
+services:
+  frontend:
+    container_name: mjsoap-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - URL_DOSARE=
+      - URL_DOSARE2=
+      - URL_SEDINTE=
+    restart: always
+    entrypoint: yarn start
+    ports:
+      - 27002:3000
