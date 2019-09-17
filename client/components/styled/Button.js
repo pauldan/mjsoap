@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { withTheme } from 'emotion-theming';
 
+import Loading from './Loading';
+
 const StyledButton = styled.button`
   font-size: 1em;
   font-weight: 700;
@@ -30,6 +32,16 @@ const StyledButton = styled.button`
     box-shadow: ${props =>
       props.theme.shadow2 + ', 0 0 2px 2px hsla(255, 100%, 0%, .2)'};
   }
+  &.loading {
+    background: none;
+  }
+`;
+
+const HideText = styled.span`
+  visibility: hidden;
+  display: block;
+  height: 0;
+  max-height: 0;
 `;
 
 const dynamicStyle = (variant, theme) => {
@@ -42,9 +54,20 @@ const dynamicStyle = (variant, theme) => {
   `;
 };
 
-const Button = ({ variant, children, theme, ...props }) => (
-  <StyledButton css={dynamicStyle(variant, theme)} {...props}>
-    {children}
+const Button = ({ variant, children, theme, loading, ...props }) => (
+  <StyledButton
+    css={dynamicStyle(variant, theme)}
+    {...props}
+    className={loading ? 'loading' : ''}
+  >
+    {loading ? (
+      <>
+        <Loading />
+        <HideText>{children}</HideText>
+      </>
+    ) : (
+      children
+    )}
   </StyledButton>
 );
 

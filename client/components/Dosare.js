@@ -184,6 +184,7 @@ class Dosare extends React.Component {
                     type="submit"
                     className="success"
                     disabled={!isChanged(values) || loading}
+                    loading={loading}
                   >
                     Caută
                   </Button>

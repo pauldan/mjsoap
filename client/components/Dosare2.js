@@ -73,7 +73,6 @@ class Dosare extends React.Component {
     if (dataStop) {
       payload.dataStop = new Date(dataStop).toISOString();
     }
-    console.log(payload);
     try {
       const res = await axios.post(
         process.env.URL_DOSARE2 || 'http://localhost:7000/cautare/dosare2',
@@ -213,6 +212,7 @@ class Dosare extends React.Component {
                     type="submit"
                     className="success"
                     disabled={!isChanged(values) || loading}
+                    loading={loading}
                   >
                     Caută
                   </Button>
