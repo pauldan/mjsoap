@@ -1,13 +1,11 @@
 const webpack = require('webpack');
 
-const { URL_DOSARE, URL_DOSARE2, URL_SEDINTE } = process.env;
+const { BACKEND_URL = 'http://localhost:7000' } = process.env;
 
 module.exports = {
   webpack: config => {
     // Fixes npm packages that depend on `fs` module
-    config.plugins.push(
-      new webpack.EnvironmentPlugin({ URL_DOSARE, URL_DOSARE2, URL_SEDINTE }),
-    );
+    config.plugins.push(new webpack.EnvironmentPlugin({ BACKEND_URL }));
     config.node = {
       fs: 'empty',
     };

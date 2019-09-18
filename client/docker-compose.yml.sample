@@ -6,9 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - URL_DOSARE=
-      - URL_DOSARE2=
-      - URL_SEDINTE=
+      - BACKEND_URL=
     restart: always
     entrypoint: yarn start
     ports:

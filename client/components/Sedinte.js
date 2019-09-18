@@ -11,6 +11,8 @@ import SearchForm from './styled/SearchForm';
 import SelectInstitutie from './SelectInstitutie';
 import ResultsSedinta from './ResultsSedinta';
 
+const SEARCH_URL = `${process.env.BACKEND_URL}/cautare/sedinte`;
+
 const validationSchema = yup.object().shape({
   dataSedinta: yup
     .date('Data început trebuie să fie o dată validă (aaaa-ll-zz).')
@@ -48,7 +50,7 @@ class Dosare extends React.Component {
     }
     try {
       const res = await axios.post(
-        process.env.URL_SEDINTE || 'http://localhost:7000/cautare/sedinte',
+        SEARCH_URL,
         {
           ...payload,
         },

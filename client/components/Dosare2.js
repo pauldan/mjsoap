@@ -11,6 +11,8 @@ import SearchForm from './styled/SearchForm';
 import SelectInstitutie from './SelectInstitutie';
 import Results from './Results';
 
+const SEARCH_URL = `${process.env.BACKEND_URL}/cautare/dosare2`;
+
 const validationSchema = yup.object().shape({
   numeParte: yup.string(),
   numarDosar: yup
@@ -75,7 +77,7 @@ class Dosare extends React.Component {
     }
     try {
       const res = await axios.post(
-        process.env.URL_DOSARE2 || 'http://localhost:7000/cautare/dosare2',
+        SEARCH_URL,
         {
           ...payload,
         },
