@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - CLIENT_URL="http://10.38.51.191:27002"
+      - CLIENT_URL=http://10.38.51.191:27002
     restart: always
     entrypoint: yarn start
     ports:
