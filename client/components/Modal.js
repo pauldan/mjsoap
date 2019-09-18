@@ -80,7 +80,7 @@ const Modal = props => {
 
   return ReactDOM.createPortal(
     <StyledModal onClick={onCancel}>
-      <Dialog onClick={() => {}}>
+      <Dialog onClick={e => e.stopPropagation()}>
         {props.children}
         <div>
           <button onClick={onCancel}>Ok</button>
