@@ -42,7 +42,13 @@ app.post('/cautare/dosare', (req, res) => {
     if (value) return { ...acc, [el]: value };
     return acc;
   }, {});
-  console.log(`[INFO] Searching for\n${JSON.stringify(search, null, 2)}`);
+  console.log(
+    `[Request from ${req.ip}] Searching for\n${JSON.stringify(
+      search,
+      null,
+      2,
+    )}`,
+  );
   soap.createClient(URL, { forceSoap12Headers: true }, (err, client) => {
     if (err) {
       res.status(503).send({ message: 'Server error' });
@@ -58,15 +64,11 @@ app.post('/cautare/dosare', (req, res) => {
       );
     });
     client.on('request', (xml, eid) => {
-      console.log(
-        `[Request from ${req.ip}] ${eid} ${new Date().toLocaleString()}`,
-      );
+      console.log(`[APICall for ${req.ip}] ${eid}`);
       console.log(req.ip);
     });
     client.on('response', (body, response, eid) => {
-      console.log(
-        `[Response to ${req.ip}] ${eid} ${new Date().toLocaleString()}`,
-      );
+      console.log(`[Response to ${req.ip}] ${eid}`);
     });
     client.CautareDosare(search, (err, result, body, eid) => {
       if (err) {
@@ -102,7 +104,13 @@ app.post('/cautare/dosare2', (req, res) => {
     if (value) return { ...acc, [el]: value };
     return acc;
   }, {});
-  console.log(`[INFO] Searching for\n${JSON.stringify(search, null, 2)}`);
+  console.log(
+    `[Request from ${req.ip}] Searching for\n${JSON.stringify(
+      search,
+      null,
+      2,
+    )}`,
+  );
   soap.createClient(URL, (err, client) => {
     if (err) {
       res.status(503).send({ message: 'Server error' });
@@ -118,14 +126,10 @@ app.post('/cautare/dosare2', (req, res) => {
       );
     });
     client.on('request', (xml, eid) => {
-      console.log(
-        `[Request from ${req.ip}] ${eid} ${new Date().toLocaleString()}`,
-      );
+      console.log(`[API Call for ${req.ip}] ${eid}`);
     });
     client.on('response', (body, response, eid) => {
-      console.log(
-        `[Response to ${req.ip}] ${eid} ${new Date().toLocaleString()}`,
-      );
+      console.log(`[Response to ${req.ip}] ${eid}`);
     });
     client.CautareDosare2(search, (err, result) => {
       if (err) {
@@ -153,7 +157,13 @@ app.post('/cautare/sedinte', (req, res) => {
   if (dataSedinta) {
     search.dataSedinta = new Date(dataSedinta).toISOString();
   }
-  console.log(`[INFO] Searching for\n${JSON.stringify(search, null, 2)}`);
+  console.log(
+    `[Request from ${req.ip}] Searching for\n${JSON.stringify(
+      search,
+      null,
+      2,
+    )}`,
+  );
   soap.createClient(URL, (err, client) => {
     if (err) {
       res.status(503).send({ message: 'Server error' });
@@ -164,19 +174,13 @@ app.post('/cautare/sedinte', (req, res) => {
       return;
     }
     client.on('soapError', (err, eid) => {
-      console.error(
-        `[ERROR] ${eid} ${new Date().toLocaleString()} Soap error: ${err}`,
-      );
+      console.error(`[ERROR] ${eid} Soap error: ${err}`);
     });
     client.on('request', (xml, eid) => {
-      console.log(
-        `[Request from ${req.ip}] ${eid} ${new Date().toLocaleString()}`,
-      );
+      console.log(`[API Call for ${req.ip}] ${eid}`);
     });
     client.on('response', (body, response, eid) => {
-      console.log(
-        `[Response to ${req.ip}] ${eid} ${new Date().toLocaleString()}`,
-      );
+      console.log(`[Response to ${req.ip}] ${eid}`);
     });
     client.CautareSedinte(search, (err, result) => {
       if (err) {
