@@ -11,7 +11,16 @@ const StyledModal = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
+`;
+
+const Blur = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: blur(100px);
 `;
 
 const Dialog = styled.div`
@@ -80,6 +89,7 @@ const Modal = props => {
 
   return ReactDOM.createPortal(
     <StyledModal onClick={onCancel}>
+      <Blur />
       <Dialog onClick={e => e.stopPropagation()}>
         {props.children}
         <div>

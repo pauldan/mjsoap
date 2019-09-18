@@ -8,6 +8,7 @@ const Nav = styled.nav`
   color: white;
   display: flex;
   justify-content: space-between;
+  border-bottom: 3px solid ${props => props.theme.color.primary};
   h1 {
     display: flex;
     justify-content: center;
