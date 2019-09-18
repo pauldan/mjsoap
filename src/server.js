@@ -65,7 +65,6 @@ app.post('/cautare/dosare', (req, res) => {
     });
     client.on('request', (xml, eid) => {
       console.log(`[APICall for ${req.ip}] ${eid}`);
-      console.log(req.ip);
     });
     client.on('response', (body, response, eid) => {
       console.log(`[Response to ${req.ip}] ${eid}`);
