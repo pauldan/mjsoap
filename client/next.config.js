@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 
-const { BACKEND_URL = 'http://localhost:7000', BASENAME = '/' } = process.env;
+const { BACKEND_URL = 'http://localhost:7000' } = process.env;
 
 module.exports = {
   webpack: config => {
@@ -12,5 +12,4 @@ module.exports = {
 
     return config;
   },
-  assetPrefix: BASENAME,
 };
