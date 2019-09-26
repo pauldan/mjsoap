@@ -65,7 +65,7 @@ class Dosare extends React.Component {
   }
 
   handleSubmit = async values => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, results: [] });
     let { dataStop, dataStart, ...payload } = values;
     if (dataStart) {
       payload.dataStart = new Date(dataStart).toISOString();
