@@ -195,7 +195,7 @@ class Dosare extends React.Component {
             );
           }}
         </Formik>
-        {hasSearched && <Results results={results} />}
+        {hasSearched && !loading && <Results results={results} />}
       </Page>
     );
   }

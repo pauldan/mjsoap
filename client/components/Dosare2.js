@@ -67,7 +67,7 @@ class Dosare extends React.Component {
   }
 
   handleSubmit = async values => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, results: [] });
     let { dataStop, dataStart, ...payload } = values;
     if (dataStart) {
       payload.dataStart = new Date(dataStart).toISOString();
@@ -223,7 +223,7 @@ class Dosare extends React.Component {
             );
           }}
         </Formik>
-        {hasSearched && <Results results={results} />}
+        {hasSearched && !loading && <Results results={results} />}
       </Page>
     );
   }

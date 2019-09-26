@@ -43,7 +43,7 @@ class Dosare extends React.Component {
   }
 
   handleSubmit = async values => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, results: [] });
     let { dataSedinta, ...payload } = values;
     if (dataSedinta) {
       payload.dataSedinta = new Date(dataSedinta).toISOString();
@@ -77,7 +77,6 @@ class Dosare extends React.Component {
 
   render() {
     const { results, loading, error, hasSearched } = this.state;
-    console.log(results);
     return (
       <Page>
         <h1>Căutare ședințe</h1>
@@ -131,7 +130,7 @@ class Dosare extends React.Component {
             );
           }}
         </Formik>
-        {hasSearched && <ResultsSedinta results={results} />}
+        {hasSearched && !loading && <ResultsSedinta results={results} />}
       </Page>
     );
   }
