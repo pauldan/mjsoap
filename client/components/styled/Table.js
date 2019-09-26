@@ -94,6 +94,16 @@ const Table = styled.table`
       }
     }
     td {
+      &.clickable {
+        a {
+          text-decoration: underline;
+          color: blue;
+          cursor:pointer;
+          &:hover {
+            color: purple;
+          }
+        }
+      }
       padding: 0.2em 0.75em;
       &.center {
         text-align: center;

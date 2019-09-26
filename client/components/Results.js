@@ -18,6 +18,16 @@ const ScrollWrapper = styled.div`
   overflow: auto;
 `;
 
+const A = styled.a`
+  text-decoration: underline;
+  color: blue !important;
+  cursor: pointer;
+  &:visited,
+  &:hover {
+    color: purple !important;
+  }
+`;
+
 const Results = ({ results }) => {
   const count = results.length;
   if (count === 0) return <h3>Nici un rezultat.</h3>;
@@ -50,7 +60,6 @@ const Results = ({ results }) => {
                 <th>Secția</th>
                 <th>Instanța</th>
                 <th>Ultima modificare</th>
-                <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
@@ -73,9 +82,11 @@ const Results = ({ results }) => {
                     key={numar}
                     className={idx === selected ? 'selected' : ''}
                   >
-                    <td>
-                      {numar}
-                      {numarVechi && `(${numarVechi})`}
+                    <td className="clickable">
+                      <a onClick={e => select(idx)}>
+                        {numar}
+                        {numarVechi && `(${numarVechi})`}
+                      </a>
                     </td>
                     <td>{new Date(data).toLocaleDateString()}</td>
                     <td>{obiect}</td>
@@ -84,9 +95,6 @@ const Results = ({ results }) => {
                     <td>{departament}</td>
                     <td>{institutie}</td>
                     <td>{new Date(dataModificare).toLocaleDateString()}</td>
-                    <td>
-                      <button onClick={e => select(idx)}>Detalii</button>
-                    </td>
                   </tr>
                 ),
               )}
