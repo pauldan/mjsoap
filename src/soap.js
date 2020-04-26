@@ -1,5 +1,5 @@
 const soap = require('soap');
-const url = 'http://portalquery.just.ro/query.asmx?WSDL';
+// const url = 'http://portalquery.just.ro/query.asmx?WSDL';
 // var args = { op: 'CautareDosare2' };
 
 const createClient = url =>
