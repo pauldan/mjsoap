@@ -11,7 +11,7 @@ import SearchForm from './styled/SearchForm';
 import SelectInstitutie from './SelectInstitutie';
 import ResultsSedinta from './ResultsSedinta';
 
-const SEARCH_URL = `${process.env.BACKEND_URL}/cautare/sedinte`;
+const SEARCH_URL = ``;
 
 const validationSchema = yup.object().shape({
   dataSedinta: yup

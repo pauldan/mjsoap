@@ -11,7 +11,7 @@ import SearchForm from './styled/SearchForm';
 import SelectInstitutie from './SelectInstitutie';
 import Results from './Results';
 
-const SEARCH_URL = `${process.env.BACKEND_URL}/cautare/dosare`;
+const SEARCH_URL = '';
 
 const validationSchema = yup.object().shape({
   numeParte: yup.string(),

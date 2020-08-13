@@ -24,6 +24,8 @@ if (NODE_ENV === 'production') {
   }
 }
 
+console.log({ basePath: process.env.BASE_PATH });
+
 //middleware
 app.use(
   cors({
@@ -40,9 +42,9 @@ app.use('/', express.static(path.join(__dirname, '../client/out')));
 
 // routes
 
-app.post('/cautare/dosare', cautareDosare);
+app.post('/dosare', cautareDosare);
 
-app.post('/cautare/dosare2', (req, res) => {
+app.post('/dosare2', (req, res) => {
   const searchOptions = [
     'numarDosar',
     'obiectDosar',
@@ -103,7 +105,7 @@ app.post('/cautare/dosare2', (req, res) => {
   });
 });
 
-app.post('/cautare/sedinte', (req, res) => {
+app.post('/sedinte', (req, res) => {
   const { institutie, dataSedinta } = req.body;
   const search = {};
   if (institutie) {
