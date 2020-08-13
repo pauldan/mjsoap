@@ -1,12 +1,37 @@
-FROM node:lts
+# client build
+FROM node:lts AS client-builder
 
-WORKDIR /app
+WORKDIR /client
 
 ENV NODE_ENV=production
-ENV NO_PROXY=<local:registry>
+# if you are deploying behind a proxy
+# ENV HTTP_PROXY=http://proxy.just.ro:8080
 
-COPY package.json /app
+COPY client/package.json /client
+# if you are pulling from a local registry
+# RUN yarn config set registry http://10.38.51.191:4873
+RUN yarn
 
-RUN yarn config set registry <local:registry> && yarn
+COPY client/ /client/
 
-COPY . /app
+RUN yarn export
+
+
+# server
+FROM node:lts
+
+WORKDIR /server
+
+ENV NODE_ENV=production
+# if you are deploying behind a proxy
+# ENV HTTP_PROXY=http://proxy.just.ro:8080
+
+COPY package.json /server
+# if you are pulling packages from a local registry
+# RUN yarn config set registry http://10.38.51.191:4873
+RUN yarn
+
+ADD ./src/ /server/src
+COPY --from=client-builder client/out /server/client/out
+
+CMD yarn start

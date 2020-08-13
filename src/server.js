@@ -10,13 +10,24 @@ const { describe, cautareDosare } = require('./soapCalls');
 
 const PORT = Number.parseInt(process.env.PORT, 10) || 7000;
 const URL = 'http://portalquery.just.ro/query.asmx?WSDL';
+const { NODE_ENV = 'production', CLIENT_URL } = process.env;
 
 const app = express();
 
-// middleware
+let origin = 'http://localhost:3000';
+
+if (NODE_ENV === 'production') {
+  if (CLIENT_URL) {
+    origin = CLIENT_URL;
+  } else {
+    origin = '*'
+  }
+}
+
+//middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin,
     optionsSuccessStatus: 200,
     credentials: 'omit',
   }),
