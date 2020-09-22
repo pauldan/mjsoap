@@ -42,7 +42,7 @@ app.use('/', express.static(path.join(__dirname, '../client/out')));
 
 // routes
 
-app.post('/dosare', cautareDosare);
+app.post('/', cautareDosare);
 
 app.post('/dosare2', (req, res) => {
   const searchOptions = [

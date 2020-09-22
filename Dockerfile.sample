@@ -4,6 +4,7 @@ FROM node:lts AS client-builder
 WORKDIR /client
 
 ENV NODE_ENV=production
+
 # If you are running behind a web proxy
 #ENV HTTP_PROXY=<proxy>
 
@@ -11,7 +12,8 @@ COPY client/package.json /client
 
 RUN yarn
 
-ENV BASE_PATH=/portalquery
+# if using proxy pass
+#ENV BASE_PATH=/portalquery
 
 COPY client/ /client/
 
@@ -25,7 +27,7 @@ WORKDIR /server
 
 ENV NODE_ENV=production
 
-#ENV NO_PROXY=10.38.51.191
+#ENV NO_PROXY=<no proxy>
 
 COPY package.json /server
 
